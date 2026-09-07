@@ -104,12 +104,13 @@ def call_vlm(
     return content
 
 
-def extract_scene_graph(image_path: str) -> str:
+def extract_scene_graph(image_path: str, question: str) -> str:
     """
-    Extract a scene graph from an image.
+    Extract only the objects and relations needed to answer the user's question.
 
-    Returns the raw model response, which will be parsed into a
-    validated SceneGraph object by the parser module.
+    The output format is JSON Lines (NDJSON):
+    one complete JSON object per line.
+
     """
     system_prompt = """
 You are a careful visual spatial understanding system.
