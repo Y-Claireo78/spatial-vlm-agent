@@ -155,7 +155,44 @@ Please analyze this image and output a scene graph in exactly this JSON format:
 }
 
 Please include only the most important visible objects and reliable spatial relations.
+""".strip()    
+    
+    user_prompt = """
+Please analyze this image and output a complete, valid JSON scene graph.
+
+Important:
+1. Output only JSON.
+2. Do not output Markdown.
+3. Do not output explanations.
+4. The JSON must be complete.
+5. Include at most 5 main visible objects.
+6. Include at most 5 reliable spatial relations.
+7. If a relation is uncertain, omit it.
+8. Use these relation labels only:
+   left_of, right_of, above, below, near, inside.
+
+Use exactly this JSON format:
+
+{
+  "objects": [
+    {
+      "id": "object_1",
+      "name": "Object name",
+      "attributes": ["visible attribute"],
+      "uncertain": false
+    }
+  ],
+  "relations": [
+    {
+      "subject_id": "object_1",
+      "relation": "left_of",
+      "object_id": "object_2",
+      "confidence": 0.8
+    }
+  ]
+}
 """.strip()
+
 
     return call_vlm(
         image_path=image_path,

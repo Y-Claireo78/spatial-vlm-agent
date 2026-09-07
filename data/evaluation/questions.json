@@ -1,0 +1,69 @@
+[
+  {
+    "id": "q01",
+    "image": "desk_01.png",
+    "question": "Is there a cup in the image?",
+    "intent": "existence",
+    "ground_truth": "yes",
+    "expected_objects": ["cup"]
+  },
+  {
+    "id": "q02",
+    "image": "desk_01.png",
+    "question": "Which side of the laptop is the cup on?",
+    "intent": "relation",
+    "ground_truth": "right",
+    "subject": "cup",
+    "reference": "laptop"
+  },
+  {
+    "id": "q03",
+    "image": "desk_01.png",
+    "question": "Which side of the laptop is the book on?",
+    "intent": "relation",
+    "ground_truth": "left",
+    "subject": "book",
+    "reference": "laptop"
+  },
+  {
+    "id": "q04",
+    "image": "desk_01.png",
+    "question": "Describe the spatial layout of the objects.",
+    "intent": "description",
+    "ground_truth": "book left of laptop, cup right of laptop"
+  },
+  {
+    "id": "q05",
+    "image": "desk_02.png",
+    "question": "Is there a keyboard in the image?",
+    "intent": "existence",
+    "ground_truth": "yes",
+    "expected_objects": ["keyboard"]
+  },
+  {
+    "id": "q06",
+    "image": "desk_02.png",
+    "question": "Which side of the keyboard is the mouse on?",
+    "intent": "relation",
+    "ground_truth": "right",
+    "subject": "mouse",
+    "reference": "keyboard"
+  },
+  {
+    "id": "q07",
+    "image": "room_01.png",
+    "question": "Is there a chair in the image?",
+    "intent": "existence",
+    "ground_truth": "yes",
+    "expected_objects": ["chair"]
+  },
+  {
+    "id": "q08",
+    "image": "room_01.png",
+    "question": "Where is the desk relative to the bed?",
+    "intent": "relation",
+    "ground_truth": "front",
+    "subject": "desk",
+    "reference": "bed"
+  }
+]
