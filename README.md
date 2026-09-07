@@ -1,39 +1,38 @@
 # spatial-vlm-agent
 A lightweight multimodal agent for image-based spatial reasoning using vision-language models.
 
-> Current status: Day 2 completed — structured scene graph extraction and lightweight spatial reasoning agent.
 
 ## Overview
-This project explores how VLMs can be integrated with deterministic
-spatial reasoning tools to build an interpretable agent pipeline.
+This project builds a VLM-powered agent that extracts structured scene graphs from images and answers spatial questions via deterministic rule-based tools.
 
-The system:
-1. Accepts an image and a natural language question
-2. Uses a VLM to extract a structured scene graph (objects + relations)
-3. Validates the scene graph with Pydantic
-4. Answers spatial questions using Python-based reasoning tools
-5. Returns the answer, the scene graph JSON, and an execution trace
+**Pipeline:**
+
+1. Accept an image and a natural-language question.
+2. Call a VLM to extract a scene graph (objects + spatial relations) and validate it with Pydantic.
+3. Query the scene graph using rule-based reasoning tools.
+4. Return the final answer, the structured JSON, and an execution trace.
 
 ## Architecture
 
 ```mermaid
 graph TD
-    A[User Image + Question] --> B[VLM Scene Graph Extraction]
-    B --> C[JSON Parsing + Pydantic Validation]
-    C --> D[SceneGraph Object]
-    D --> E[Spatial Reasoning Tools]
-    E --> F[Final Answer + Execution Trace]
+    A[Image + Question] --> B[VLM Extraction]
+    B --> C[Parser + Pydantic Validation]
+    C --> D[SceneGraph]
+    D --> E[Rule-based Query Tools]
+    E --> F[Answer + JSON + Trace]
+
 ```
 
 ## Demo
-
+![Demo Screenshot](assets/demo_screenshot.png)
 <img width="1604" height="872" alt="demo_screenshot" src="https://github.com/user-attachments/assets/7fe4810c-c7dc-42c8-a6b5-2f4087e8bb5a" />
 
 
 ## Quick Start
 
 ### 1. Clone the repository
-git clone https://github.com/<your-github-id>/spatial-vlm-agent.git
+git clone https://github.com/Y-Claireo78/spatial-vlm-agent.git
 
 cd spatial-vlm-agent
 
@@ -73,7 +72,7 @@ python app.py
 
 Then open:
 ```text
-http://127.0.0.1:7861
+http://127.0.0.1:7860
 ```
 ### 6.Running Tests
 pytest -v
@@ -100,13 +99,51 @@ spatial-vlm-agent/
 │   ├── scene_graph_parser.py       # JSON parsing and normalization
 │   └── tools.py                    # Spatial reasoning tools
 │
+├── tests/
+│   ├── __init__.py
+│   ├── test_schemas.py
+│   └── test_tools.py
+│
+├── scripts/
+│   └── run_evaluation.py           # Evaluation runner
+│
+├── data/
+│   └── evaluation/
+│       ├── questions.json
+│       ├── README.md
+│       └── images/
+│           ├── desk_01.jpg
+│           ├── desk_02.jpg
+│           └── room_01.jpg
+│
+│
 └── assets/
     ├── demo_screenshot.png
-
 ```
-## Development Notes
-The project uses an OpenAI-compatible API interface, allowing different VLM providers to be configured through environment variables.
+## Current Capabilities
+- Image upload and visual question answering
+- Structured scene graph extraction with VLM
+- Pydantic validation of model output
+- Object existence queries
+- Basic spatial relation queries (left/right, above/below, near)
+- Scene description generation
+- Execution trace visualization
+- Unit tests for core logic
+- Small-scale evaluation benchmark
 
-The system prompt asks the model not to hallucinate objects and to explicitly indicate uncertainty when visual information is insufficient.
+## Limitations
+- Single-view spatial reasoning is inherently ambiguous
+- Relies on VLM accuracy for scene graph extraction
+- No 3D geometry or depth estimation
+- Spatial relation queries are limited to predefined relation types (left_of, right_of, above, below, near)
+- Small evaluation set (8 questions)
+- May fail with cluttered or low-quality images
+- This is a learning-oriented project; the goal is to build a working prototype and understand the full stack, not to achieve SOTA performance.
 
-This is an early MVP. Current answers are generated directly by the VLM without explicit scene graph reasoning.
+## Future Work
+- Integrate object detection (YOLO/SAM) for reliable localization
+- Add multi-view input for better spatial understanding
+- Expand evaluation to 50+ diverse images
+- Implement embedding-based name matching
+- Support 3D scene graphs
+- Add user feedback loop for correction
