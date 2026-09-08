@@ -292,7 +292,11 @@ def run_agent(
     trace.append(f"Detected intent: {intent}")
 
     trace.append("Step 2: call VLM to extract scene graph")
-    raw_response = extract_scene_graph(image_path)
+    raw_response = extract_scene_graph(
+    image_path=image_path,
+    question=question,
+)
+
 
     trace.append("Step 3: parse and validate structured JSON")
     scene_graph = parse_scene_graph_response(raw_response)

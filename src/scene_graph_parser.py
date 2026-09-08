@@ -247,3 +247,4 @@ def parse_scene_graph_response(raw_response: str) -> SceneGraph:
     normalized_data = normalize_scene_graph_dict(raw_data)
 
     return SceneGraph.model_validate(normalized_data)
+
